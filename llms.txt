@@ -27,3 +27,6 @@
 - [claude-skill-context-sync](https://github.com/shimo4228/claude-skill-context-sync): audits and fixes project documentation roles (CLAUDE.md, ADR, README)
 - [claude-skill-search-first](https://github.com/shimo4228/claude-skill-search-first): research-before-coding workflow — find existing libraries before building
 - [claude-skill-stocktake](https://github.com/shimo4228/claude-skill-stocktake): quality audit for skills and commands
+- [claude-skill-rules-distill](https://github.com/shimo4228/claude-skill-rules-distill): scan installed skills, extract cross-cutting principles, and distill them into rules
+- [claude-skill-learn-eval](https://github.com/shimo4228/claude-skill-learn-eval): extract reusable patterns from sessions, self-evaluate quality, and save to the right location
+- [claude-skill-daily-research](https://github.com/shimo4228/claude-skill-daily-research): cron-driven daily research digest — theme selection, multi-stage web research, LLM-as-Judge evaluation
