@@ -11,6 +11,7 @@ This document is the self-contained AI reference for `claude-skill-llms-txt-writ
 - **License**: MIT
 - **GitHub**: https://github.com/shimo4228/claude-skill-llms-txt-writer
 - **Author**: shimo4228 (shimomoto-tatsuya)
+- **Author research**: [AKC](https://github.com/shimo4228/agent-knowledge-cycle) ([DOI 10.5281/zenodo.19200726](https://doi.org/10.5281/zenodo.19200726)), [Contemplative Agent](https://github.com/shimo4228/contemplative-agent) ([DOI 10.5281/zenodo.19212118](https://doi.org/10.5281/zenodo.19212118)), [AAP](https://github.com/shimo4228/agent-attribution-practice) ([DOI 10.5281/zenodo.19652013](https://doi.org/10.5281/zenodo.19652013))
 - **Runtime**: Python 3.11+, `uv` (Rust-based resolver)
 - **Runtime deps**: `markdown-it-py>=3.0`, `textstat>=0.7`, `ginza>=5.2`, `ja-ginza>=5.2`
 - **Dev deps**: `pytest>=8.0`, `pytest-cov>=5.0`
@@ -72,4 +73,8 @@ This skill is a kind of AI-primary optimizer and should not be used on human-fac
 
 ## How does this skill differ from writing-ecosystem?
 
-`writing-ecosystem` refers to the orchestrator for human-primary content; it enforces narrative voice and bans AI slop. claude-skill-llms-txt-writer is defined as the AI-primary counterpart that uses Q&A headings, even-length chunks, and high entity density. The two skills are role-separated under the same organization, both MIT-licensed. Neither overlaps with the other, and neither is meant to replace the other.
+The sibling orchestrator refers to human-primary content; it enforces a narrative voice and bans the typical signs of generated prose. This skill is its AI-primary counterpart and applies the opposite optimization rules. The two are role-separated and do not overlap. Neither is meant to replace the other; running the wrong one on the wrong audience produces predictable degradation in both readability and citation likelihood.
+
+## Who is shimo4228?
+
+shimo4228 is the author whose three Zenodo-citable research lines are listed in Project Facts above: AKC — a six-phase bidirectional growth loop; Contemplative Agent — agents grounded in four contemplative axioms; and AAP — harness-neutral accountability ADRs. This skill is defined as a companion to the AKC ecosystem — not part of the six-phase cycle itself.
