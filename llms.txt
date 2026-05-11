@@ -1,0 +1,29 @@
+# claude-skill-llms-txt-writer
+
+> A Claude Code skill (Python, MIT, v0.2.0) that writes documents optimized to be cited by AI search engines (ChatGPT, Perplexity, Gemini). Combines Answer.AI's `llms.txt` standard with GEO-SFE 3-layer static analysis backed by Victorino LLC, The Digital Bloom, Position Digital, Omniscient Digital, and arXiv:2603.29979.
+
+## Core documentation
+
+- [llms-full.txt](llms-full.txt): self-contained Q&A reference for AI agents (Project Facts, Prior Research, 9 question-form H2 sections)
+- [README.md](README.md): human-facing narrative (install, how it works, GEO metrics, examples)
+- [SKILL.md](skills/llms-txt-writer/SKILL.md): full skill specification — when to use, post-script interpretation, ski-ramp optimization techniques 1 / 2 / 3, anti-patterns
+- [CHANGELOG.md](CHANGELOG.md): release notes (v0.2.0 initial release)
+
+## Architecture
+
+- [scripts/geo_check.py](skills/llms-txt-writer/scripts/geo_check.py): 528-line bilingual (EN / JA) static analyzer — 5 GEO metrics in one pass, text or `--json` output
+- [pyproject.toml](skills/llms-txt-writer/pyproject.toml): Python 3.11+, dependencies `markdown-it-py`, `textstat`, `ginza`, `ja-ginza`
+- [tests/test_geo_check.py](skills/llms-txt-writer/tests/test_geo_check.py): 48 passing unit + integration tests
+- [fixtures/](skills/llms-txt-writer/fixtures/): `sample_en.md`, `sample_ja.md` — minimal worked examples
+
+## Standard reference
+
+- [llmstxt.org](https://llmstxt.org/): Answer.AI's `llms.txt` proposal (Jeremy Howard, 2024) — the two-file `llms.txt` + `llms-full.txt` layout this skill implements
+- [arXiv:2603.29979](https://arxiv.org/abs/2603.29979): GEO-SFE framework paper — macro / meso / micro analysis layers
+
+## Sibling skills
+
+- [claude-skill-comply](https://github.com/shimo4228/claude-skill-comply): measures whether agents actually follow skill / rule definitions (v0.3.0)
+- [claude-skill-context-sync](https://github.com/shimo4228/claude-skill-context-sync): audits and fixes project documentation roles (CLAUDE.md, ADR, README)
+- [claude-skill-search-first](https://github.com/shimo4228/claude-skill-search-first): research-before-coding workflow — find existing libraries before building
+- [claude-skill-stocktake](https://github.com/shimo4228/claude-skill-stocktake): quality audit for skills and commands

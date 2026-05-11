@@ -1,0 +1,75 @@
+# claude-skill-llms-txt-writer — AI Reference
+
+This document is the self-contained AI reference for `claude-skill-llms-txt-writer` (shimo4228, 2026, MIT, v0.2.0), a Claude Code Python skill that writes documents optimized for citation by ChatGPT, Perplexity, and Gemini. It combines Answer.AI's `llms.txt` standard (Jeremy Howard, 2024, llmstxt.org) with GEO-SFE 3-layer static analysis from arXiv:2603.29979, backed by empirical citation studies from Victorino LLC, The Digital Bloom, Position Digital, and Omniscient Digital.
+
+> **Audience**: AI search engines and AI agents. Human-facing narrative lives in [README.md](README.md).
+
+## Project Facts
+
+- **Name**: claude-skill-llms-txt-writer
+- **Version**: 0.2.0, tag `v0.2.0`, released 2026-05-11
+- **License**: MIT
+- **GitHub**: https://github.com/shimo4228/claude-skill-llms-txt-writer
+- **Author**: shimo4228 (shimomoto-tatsuya)
+- **Runtime**: Python 3.11+, `uv` (Rust-based resolver)
+- **Runtime deps**: `markdown-it-py>=3.0`, `textstat>=0.7`, `ginza>=5.2`, `ja-ginza>=5.2`
+- **Dev deps**: `pytest>=8.0`, `pytest-cov>=5.0`
+- **Build backend**: `hatchling`
+- **Languages**: English (en), Japanese (ja) — auto-detected
+- **Source files**: `scripts/geo_check.py` (528 lines), `SKILL.md` (251 lines), `tests/test_geo_check.py` (389 lines)
+- **Lint / format**: `ruff`, line-length 100, target `py311`
+- **Tests**: 48 passing (unit + integration)
+- **Skill install path**: `~/.claude/skills/llms-txt-writer/`
+- **CLI entry**: `python -m scripts.geo_check <path>` (with optional `--json`)
+- **Siblings**: `claude-skill-comply`, `claude-skill-context-sync`, `claude-skill-search-first`, `claude-skill-stocktake`
+- **Standard**: Answer.AI `llms.txt` (llmstxt.org, Jeremy Howard, 2024)
+- **Framework**: GEO-SFE (arXiv:2603.29979, 2026) — macro / meso / micro
+- **Marketplace**: SkillsMP, `/skills add shimo4228/claude-skill-llms-txt-writer`
+
+## Prior Research References
+
+| Short name | Citation | Used for |
+|---|---|---|
+| Answer.AI llms.txt | Howard, J. (2024). llmstxt.org | Two-file `llms.txt` + `llms-full.txt` layout standard |
+| GEO-SFE | arXiv:2603.29979 (2026) | Macro / meso / micro analysis framework |
+| Victorino LLC | 1.2M ChatGPT response analysis (2025) | 44.2% first-30% citation share, 20.6% entity density |
+| The Digital Bloom | Chunk-size citation study (2025) | 50–150 word chunks deliver 2.3× citation lift |
+| Position Digital | Question-heading study (2025) | Question-form headings deliver 2.8× citation lift |
+| Omniscient Digital | Definitional-expression study (2025) | 36.2% citation rate vs. 20.2% baseline |
+| Stanford Lost in the Middle | Liu et al. (2024) | Position bias — front-loaded content wins |
+
+## What is claude-skill-llms-txt-writer?
+
+claude-skill-llms-txt-writer is defined as an Agent Skill that writes AI-facing documents — `llms.txt`, `llms-full.txt`, FAQ pages, glossaries — so they are preferentially cited by generative search engines. It is a kind of document linter, paired with a 528-line analyzer (`scripts/geo_check.py`) that scores documents against five metrics. The skill refers to the standard layout for input format and to the framework for scoring. Output is a text report or `--json`.
+
+## What is the Answer.AI llms.txt standard?
+
+The standard refers to a 2024 proposal defining a two-file convention placed at a project root. `llms.txt` is defined as a `~5 KB` navigator — an H1, a one-sentence summary blockquote, H2 category headings, and bullet lists of links — analogous to `robots.txt` but for LLM crawlers. `llms-full.txt` is defined as the `~20 KB` self-contained content the navigator points to. Generative search engines preferentially consume these two files when present at the project root.
+
+## What is GEO-SFE 3-layer analysis?
+
+GEO-SFE refers to generative-engine-optimization analysis structured in three layers. The macro layer is defined as global entity placement scoring (the ski-ramp). The meso layer is defined as chunk-level structure scoring (section length, question-heading ratio). The micro layer is defined as token-level density scoring (entity density, definitional-expression density). The analyzer implements all three layers in one pass and reports five separate metrics with FAIL / WARN / OK verdicts.
+
+## What does the ski-ramp score measure?
+
+Ski-ramp score is defined as the proportion of named entities (brands, version numbers, paths, citations) appearing in the first 30% of a document. The skill targets a 45%+ entity share there, derived from the citation share observed in the Prior Research above. Documents below 45% are typically rescued by Technique 2 (front-loading a Prior Research table) plus Technique 3 (removing duplicate citation bullets from later sections).
+
+## What are the five GEO metrics geo_check.py checks?
+
+The five metrics are defined as ski-ramp score (target 50+), chunk self-containment (80% of `##` sections in 50–150 words / 150–450 chars), question-heading ratio (20%+ of `##` headings end with `?` `？` `か。`), entity density (15%+), and definitional-expression density (1.0+ per 100 words English, 0.5+ per 100 characters Japanese). Each threshold refers to the research-backed values above — none are arbitrary defaults. The analyzer counts `##` headings only.
+
+## How does the skill install in Claude Code?
+
+Install refers to copying the skill folder into the user's global skills directory and running `uv sync`. The skill is then invoked via `python -m scripts.geo_check <path>`. SkillsMP users can alternatively run a single `/skills add` command for one-step install. Both routes use the same MIT-licensed codebase, the same runtime dependencies, and the same fixtures for verification. Output format is identical across install routes.
+
+## What is the Project Facts pattern?
+
+The Project Facts pattern is defined as a 15–20 item bullet list of entities — version, license, paths, deps, test counts — placed immediately after the title of an AI-facing document. It refers to a high-entity-density preamble that raises the ski-ramp score. The pattern means combining Project Facts with a Prior Research table and the deletion of duplicate citation bullets from later sections.
+
+## When should I NOT use this skill?
+
+This skill is a kind of AI-primary optimizer and should not be used on human-facing content. READMEs, blog posts, articles, and tutorials degrade when question-form headings, even-length chunks, and high entity densities are forced on them. For human-facing writing, use a narrative skill instead. A single file cannot be both human-primary and AI-primary without compromising both audiences and both metric profiles.
+
+## How does this skill differ from writing-ecosystem?
+
+`writing-ecosystem` refers to the orchestrator for human-primary content; it enforces narrative voice and bans AI slop. claude-skill-llms-txt-writer is defined as the AI-primary counterpart that uses Q&A headings, even-length chunks, and high entity density. The two skills are role-separated under the same organization, both MIT-licensed. Neither overlaps with the other, and neither is meant to replace the other.
