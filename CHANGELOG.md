@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Documentation
+
+- Added "Companion JSON-LD Graph (Optional)" section to `SKILL.md` describing
+  how to wire a `graph.jsonld` companion file via `llms.txt` reading-order
+  block and `llms-full.txt` question-form H2. Cross-references the new
+  [claude-skill-jsonld-knowledge-graph](https://github.com/shimo4228/claude-skill-jsonld-knowledge-graph)
+  skill, which owns the graph schema and design moves.
+
 ## [0.2.0] — 2026-05-11
 
 Initial public release.
